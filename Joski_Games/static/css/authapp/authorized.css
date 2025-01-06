@@ -1,0 +1,105 @@
+body {
+    background: #141414;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    position: absolute; /* Фиксируем позицию контейнера */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрируем контейнер */
+    z-index: 1; /* Убедитесь, что форма находится поверх фигур */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #004643;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #004643;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #004643;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #004643;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px; /* Добавляем отступ сверху */
+}
+
+button:hover {
+    background-color: #5f006f;
+}
+
+#loginButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #5f006f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px; /* Добавляем отступ сверху */
+}
+
+#loginButton:hover {
+    background-color: #004643;
+}
+
+#registerButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #5f006f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px; /* Добавляем отступ сверху */
+}
+
+#registerButton:hover {
+    background-color: #004643;
+}

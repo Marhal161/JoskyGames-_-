@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  django:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    restart: always
+    volumes:
+      - .:/Joski_Games
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+    env_file: .env
+
+  db:
+    image: postgres:latest
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: db_games
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: user_db_games
+      POSTGRES_PASSWORD: 123123
+    env_file: .env
+
+volumes:
+  postgres_data:
