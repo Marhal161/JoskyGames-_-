@@ -3,10 +3,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from ..serializers import RegisterSerializer  # Импорт сериализатора
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
-
 
 class RegisterView(APIView):
     @staticmethod
@@ -21,18 +20,10 @@ class RegisterView(APIView):
                 access_token = str(refresh.access_token)
 
                 # Установка куки
-                response = JsonResponse({
-                    'success': True,
-                    'user': {
-                        'id': user.id,
-                        'first_name': user.first_name,
-                        'last_name': user.last_name,
-                        'email': user.email,
-                        'username': user.username,
-                    }
-                }, status=status.HTTP_201_CREATED)
+                response = HttpResponseRedirect('/')
                 response.set_cookie('access_token', access_token, httponly=True)
                 response.set_cookie('refresh_token', str(refresh), httponly=True)
+                response.status_code = status.HTTP_201_CREATED  # Установка статус кода 201
 
                 # Возвращение ответа
                 return response
@@ -46,7 +37,6 @@ class RegisterView(APIView):
             'message': 'Validation errors',
             'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
-
 
 class RegisterFView(View):
     def get(self, request):

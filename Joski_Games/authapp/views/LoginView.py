@@ -2,12 +2,12 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from ..serializers.LoginSerializer import LogSerializer
+from ..serializers import LoginSerializer
 
 class LoginView(APIView):
     @staticmethod
     def post(request):
-        serializer = LogSerializer(data=request.data)
+        serializer = LoginSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             user = serializer.validated_data['user']
 
@@ -27,6 +27,6 @@ class LoginView(APIView):
 
             return response
         else:
-            if 'invalid' in serializer.errors:
+            if 'non_field_errors' in serializer.errors:
                 return Response({'detail': 'Неверный логин или пароль'}, status=status.HTTP_401_UNAUTHORIZED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

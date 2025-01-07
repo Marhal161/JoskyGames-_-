@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.test import APIClient
 from django.urls import reverse
 from ..models import User
+from django.http import JsonResponse
 
 @pytest.mark.django_db
 class TestRegisterView:
@@ -11,14 +12,14 @@ class TestRegisterView:
         self.url = reverse('register')  # Убедитесь, что у вас есть соответствующий URL-маршрут
 
     def test_successful_registration(self):
-        data = {
+        data = JsonResponse({
             'username': 'testuser',
             'first_name': 'Test',
             'last_name': 'User',
             'email': 'testuser@example.com',
             'password': 'testpassword',
             'phone': '1234567890'
-        }
+        })
         response = self.client.post(self.url, data, format='json')
         assert response.status_code == status.HTTP_201_CREATED
         assert response.data['success'] is True
@@ -28,54 +29,54 @@ class TestRegisterView:
 
     def test_duplicate_email_registration(self):
         User.objects.create(username='testuser1', email='testuser@example.com', password='testpassword')
-        data = {
+        data = JsonResponse({
             'username': 'testuser2',
             'first_name': 'Test',
             'last_name': 'User',
             'email': 'testuser@example.com',
             'password': 'testpassword',
             'phone': '1234567890'
-        }
+        })
         response = self.client.post(self.url, data, format='json')
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert 'email' in response.data
 
     def test_duplicate_username_registration(self):
         User.objects.create(username='testuser', email='testuser1@example.com', password='testpassword')
-        data = {
+        data = JsonResponse({
             'username': 'testuser',
             'first_name': 'Test',
             'last_name': 'User',
             'email': 'testuser2@example.com',
             'password': 'testpassword',
             'phone': '1234567890'
-        }
+        })
         response = self.client.post(self.url, data, format='json')
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert 'username' in response.data
 
     def test_invalid_data_registration(self):
-        data = {
+        data = JsonResponse({
             'username': '',
             'first_name': 'Test',
             'last_name': 'User',
             'email': 'invalidemail',
             'password': 'testpassword',
             'phone': '1234567890'
-        }
+        })
         response = self.client.post(self.url, data, format='json')
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert 'username' in response.data
         assert 'email' in response.data
 
     def test_missing_fields_registration(self):
-        data = {
+        data = JsonResponse({
             'username': 'testuser',
             'first_name': 'Test',
             'last_name': 'User',
             'email': 'testuser@example.com',
             'phone': '1234567890'
-        }
+        })
         response = self.client.post(self.url, data, format='json')
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert 'password' in response.data

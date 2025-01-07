@@ -1,9 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const loginButton = document.getElementById('loginButton');
-
-    loginButton.addEventListener('click', function() {
-        window.location.href = '/auth/login/'; // Перенаправление на страницу логина
-    });
 
     function getCookie(name) {
         let cookieValue = null;

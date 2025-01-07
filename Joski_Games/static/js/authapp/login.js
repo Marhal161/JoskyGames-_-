@@ -1,9 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const registerButton = document.getElementById('registerButton');
-
-    registerButton.addEventListener('click', function() {
-        window.location.href = '/auth/register/'; // Перенаправление на страницу логина
-    });
 
     function getCookie(name) {
         let cookieValue = null;
