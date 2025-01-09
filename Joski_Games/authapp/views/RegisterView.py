@@ -20,7 +20,12 @@ class RegisterView(APIView):
                 access_token = str(refresh.access_token)
 
                 # Установка куки
-                response = HttpResponseRedirect('/')
+                response = Response({
+                    'success': True,
+                    'access_token': access_token,
+                    'refresh_token': str(refresh),
+                    'user_id': user.id  # Отправляем только ID пользователя
+                })
                 response.set_cookie('access_token', access_token, httponly=True)
                 response.set_cookie('refresh_token', str(refresh), httponly=True)
                 response.status_code = status.HTTP_201_CREATED  # Установка статус кода 201
@@ -37,7 +42,3 @@ class RegisterView(APIView):
             'message': 'Validation errors',
             'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
-
-class RegisterFView(View):
-    def get(self, request):
-        return render(request, 'register.html')

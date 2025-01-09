@@ -15,10 +15,7 @@ class LogoutView(APIView):
                 refresh_token.set_jti()  # Устанавливаем новый jti
 
                 # Удаляем токен из куки
-                response = Response({
-                    'success': True,
-                    'message': 'Вы успешно вышли из системы.'
-                }, status=status.HTTP_200_OK)
+                response = Response(status=status.HTTP_200_OK)
                 response.delete_cookie('access_token')  # Удаляем access_token
                 response.delete_cookie('refresh_token')  # Удаляем refresh_token
                 return response

@@ -15,6 +15,7 @@ class LoginView(APIView):
             refresh = RefreshToken.for_user(user)
             access_token = str(refresh.access_token)
 
+
             # Установка куки
             response = Response({
                 'success': True,
@@ -24,6 +25,7 @@ class LoginView(APIView):
             }, status=status.HTTP_200_OK)
             response.set_cookie('access_token', access_token, httponly=True)
             response.set_cookie('refresh_token', str(refresh), httponly=True)
+
 
             return response
         else:
