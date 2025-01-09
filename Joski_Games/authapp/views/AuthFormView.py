@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
 
-class LoginFView(View):
+class AuthView(View):
     def get(self, request):
-        return render(request, 'login.html')
+        return render(request, 'auth.html')
