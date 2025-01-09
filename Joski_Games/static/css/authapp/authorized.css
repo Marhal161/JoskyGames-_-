@@ -103,3 +103,45 @@ button:hover {
 #registerButton:hover {
     background-color: #004643;
 }
+
+/* Стили для сообщения об ошибке */
+.error-message {
+    background-color: #ff4d4d; /* Красный фон для ошибки */
+    color: #fff; /* Белый текст */
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Позиционирование относительно контейнера */
+    top: 260px; /* Смещение вверх над формой */
+    left: 50%;
+    transform: translateX(-50%); /* Центрирование по горизонтали */
+    z-index: 2; /* Убедитесь, что сообщение находится поверх формы */
+    text-align: center;
+    font-size: 14px;
+    width: 80%; /* Ширина сообщения */
+    max-width: 300px; /* Максимальная ширина */
+}
+
+.error-message .close-btn:hover {
+    color: #ccc;
+}
+
+/* Анимация для сообщения об ошибке */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    25% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+    50% {
+        transform: translateX(-50%) translateY(0);
+    }
+    75% {
+        transform: translateX(-50%) translateY(5px);
+    }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
