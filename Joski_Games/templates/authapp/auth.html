@@ -13,7 +13,7 @@
 <div class="container">
   <div id="login-form">
     <h2>Login</h2>
-    <form id="loginForm" method="post">
+    <form id="loginForm" method="post" data-url="{% url 'login' %}">
       {% csrf_token %}
       <div class="form-group">
         <label for="email">Email</label>
@@ -30,7 +30,7 @@
 
   <div id="register-form" style="display: none;">
     <h2>Register</h2>
-    <form id="registerForm" method="post">
+    <form id="registerForm" method="post" data-url="{% url 'register' %}">
       {% csrf_token %}
       <div class="form-group">
         <label for="first_name">First Name</label>

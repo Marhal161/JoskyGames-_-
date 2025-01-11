@@ -13,12 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('loginForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        submitForm('loginForm', '{% url "login" %}');
+        const url = event.target.getAttribute('data-url');
+        submitForm('loginForm', url);
     });
 
     document.getElementById('registerForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        submitForm('registerForm', '{% url "register" %}');
+        const url = event.target.getAttribute('data-url');
+        submitForm('registerForm', url);
     });
 
     function submitForm(formId, url) {
